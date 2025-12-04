@@ -11,11 +11,19 @@
   <link rel="icon" type="image/png" href="logo.png">
   </head>
 <body>
+  <div id="page-top"></div>
   <header>
       <img src="logo.png" alt="logo" id="img-header-logo">
       <h1>
         Uázkový text fiktivní restaurace
       </h1>
+      <img src="menu-icon.png" alt="menu" id="menu-icon">
+      <div id="side-navigating">
+        <div id="close-btn"></div>
+          <button class="navi-btn" onclick="location.href='#page-top'">Úvod</button>
+          <button class="navi-btn" onclick="location.href='#menu'">Menu</button>
+          <button class="navi-btn" onclick="location.href='#page-end'">Kontakty</button>
+      </div>
   </header>
   <div id="content">
     <div id="welcome-page">
@@ -147,11 +155,46 @@
       
     </div>
   </div>
-  <footer>
+  <footer id="page-end">
     <div class="footer-text"> <img src="phone.png" alt="" class="footer-img"> +420 123 456 789</div>
     <div class="footer-text"> <img src="place.png" alt="" class="footer-img"> Benešova 605/18, 602 00 Brno-střed</div>
     <div class="footer-text"> <img src="mail.png" alt="" class="footer-img"> restaurace@example.com</div>
     <div class="footer-text"> <img src="clock.png" alt="" class="footer-img"> Otevírací doba : 09:00 – 19:00</div>
   </footer>
 </body>
+  <script>
+  const openMenu = document.getElementById("menu-icon");
+  const closeMenu = document.getElementById("close-btn");
+  const sideMenu = document.getElementById("side-navigating");
+
+  openMenu.addEventListener("click", () => {
+      sideMenu.classList.toggle("open");
+      openMenu.classList.toggle("hidden");
+  });
+  closeMenu.addEventListener("click", () => {
+      sideMenu.classList.remove("open");
+      openMenu.classList.remove("hidden");
+  });
+
+  // close 
+  /* 
+        sideMenu.classList.remove("open");
+      img.classList.remove("hidden");
+  */
+
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  function addClassToAll(className) {
+    const allElements = document.querySelectorAll('*'); // vybere všechny prvky
+    allElements.forEach(el => el.classList.add(className));
+  } 
+
+  // Přidá třídu "mobile" na <body>, pokud je mobil
+  if (isMobile()) {
+    addClassToAll("mobile");
+    // document.body.classList.add("mobile");
+  }
+  </script>
 </html>
