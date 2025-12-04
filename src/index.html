@@ -32,7 +32,7 @@
           Vítejte u nás!
         </h2>
         <p id="welcome-text">
-          Jsme vyhlášená mexická restaurace v Brně. Máme bohaté polední menu ze kterého si bybere každý. Mezi naše speciality patří především Grilled Halloumi Salad a Crispy Orange Chicken. Těšíme se na Vaši návštěvu.</p>
+          Jsme vyhlášená mexická restaurace v Brně. Máme bohaté polední menu ze kterého si vybere každý. Mezi naše speciality patří především Grilled Halloumi Salad a Crispy Orange Chicken. Těšíme se na Vaši návštěvu.</p>
         <button id="menu-btn" onclick="location.href='#menu'">
           <b>
           MENU
@@ -156,10 +156,10 @@
     </div>
   </div>
   <footer id="page-end">
-    <div class="footer-text"> <img src="phone.png" alt="" class="footer-img"> +420 123 456 789</div>
-    <div class="footer-text"> <img src="place.png" alt="" class="footer-img"> Benešova 605/18, 602 00 Brno-střed</div>
-    <div class="footer-text"> <img src="mail.png" alt="" class="footer-img"> restaurace@example.com</div>
-    <div class="footer-text"> <img src="clock.png" alt="" class="footer-img"> Otevírací doba : 09:00 – 19:00</div>
+    <div class="footer-text"> <img src="phone.png" alt="" class="footer-img"> <p class="contact-info">+420 123 456 789</p></div>
+    <div class="footer-text"> <img src="place.png" alt="" class="footer-img"> <p class="contact-info">Benešova 605/18, 602 00 Brno-střed</p></div>
+    <div class="footer-text"> <img src="mail.png" alt="" class="footer-img"> <p class="contact-info">restaurace@example.com</p></div>
+    <div class="footer-text"> <img src="clock.png" alt="" class="footer-img"> <p class="contact-info">Otevírací doba : 09:00 – 19:00</p></div>
   </footer>
 </body>
   <script>
@@ -174,6 +174,17 @@
   closeMenu.addEventListener("click", () => {
       sideMenu.classList.remove("open");
       openMenu.classList.remove("hidden");
+  });
+
+  document.addEventListener("click", (e) => {
+    // když sidebar je otevřený
+    if (sideMenu.classList.contains("open")) {
+      // a klik není uvnitř sidebaru ani na tlačítku
+      if (!sideMenu.contains(e.target) && !openMenu.contains(e.target)) {
+        sideMenu.classList.remove("open");
+        openMenu.classList.remove("hidden");
+      }
+    }
   });
 
   // close 
