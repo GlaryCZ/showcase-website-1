@@ -12,19 +12,20 @@
   </head>
 <body>
   <div id="page-top"></div>
-  <header>
+  <header id="site-header">
       <img src="logo.png" alt="logo" id="img-header-logo">
       <h1>
         Uázkový text fiktivní restaurace
       </h1>
       <img src="menu-icon.png" alt="menu" id="menu-icon">
-      <div id="side-navigating">
-        <div id="close-btn"></div>
-          <button class="navi-btn" onclick="location.href='#page-top'">Úvod</button>
-          <button class="navi-btn" onclick="location.href='#menu'">Menu</button>
-          <button class="navi-btn" onclick="location.href='#page-end'">Kontakty</button>
-      </div>
   </header>
+  <div id="side-navigating">
+    <div id="close-btn"></div>
+      <button class="navi-btn" onclick="location.href='#page-top'">Úvod</button>
+      <button class="navi-btn" onclick="location.href='#menu'">Menu</button>
+      <button class="navi-btn" onclick="location.href='#page-end'">Kontakty</button>
+  </div>
+  <div id="free-space" style="height: 6em; background-color: #181510;"></div>
   <div id="content">
     <div id="welcome-page">
       <div id="welcome-text-div">
@@ -167,6 +168,7 @@
   const closeMenu = document.getElementById("close-btn");
   const sideMenu = document.getElementById("side-navigating");
 
+  /* open/close side menu */
   openMenu.addEventListener("click", () => {
       sideMenu.classList.toggle("open");
       openMenu.classList.toggle("hidden");
@@ -187,11 +189,38 @@
     }
   });
 
-  // close 
-  /* 
+
+  /* close menu on button click (mobile only) */
+  const buttons = document.querySelectorAll('.navi-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (isMobile()) {
         sideMenu.classList.remove("open");
-      img.classList.remove("hidden");
-  */
+        openMenu.classList.remove("hidden");
+      }
+    });
+  });
+
+
+  /* scroll header hide/show */
+  let lastScroll = 0;
+  const header = document.getElementById("site-header");
+
+  window.addEventListener("scroll", () => {
+    const current = window.pageYOffset;
+
+    if (current > lastScroll) {
+      // scrolling down → hide header
+      header.classList.add("hide");
+    } else {
+      // scrolling up → show header
+      header.classList.remove("hide");
+    }
+
+    lastScroll = current;
+  });
+
+
 
   function isMobile() {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -205,7 +234,6 @@
   // Přidá třídu "mobile" na <body>, pokud je mobil
   if (isMobile()) {
     addClassToAll("mobile");
-    // document.body.classList.add("mobile");
   }
   </script>
 </html>
